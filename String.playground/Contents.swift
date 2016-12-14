@@ -17,6 +17,9 @@ let personalizedGreeting = "Welcome, \(name)!"
 
 //修改
 var otherGreeting = greeting
+
+
+
 otherGreeting += " Have a nice time!"
 print(otherGreeting)
 print(greeting)
@@ -85,7 +88,6 @@ print(cafe.utf8.count)
 //Prints "14"
 print(Array(cafe.utf8))
 //240, 159, 140, 141]"
-
 let cLength = strlen(cafe)
 print(cLength)
 //Prints "14"
@@ -105,7 +107,9 @@ let firstSpaceUTF8 = firstSpace.samePosition(in: name.utf8)
 print(Array(name.utf8.prefix(upTo: firstSpaceUTF8)))
 //Prints "[77, 97, 114, 105, 101]"
 
+
 var s: String? = "Foo"
+
 print(s?.characters)
 var t: String? = "Foo"
 print(t?.characters)
