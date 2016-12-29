@@ -2,6 +2,14 @@
 
 import UIKit
 
+CharacterView(_core: Swift._StringCore(_baseAddress: Optional(0x00000001175c4970), _countAndFlags: 17, _owner: nil))
+CharacterView(_core: Swift._StringCore(_baseAddress: Optional(0x000061800007da20), _countAndFlags: 17, _owner: Optional(Swift._HeapBufferStorage<Swift._StringBufferIVars, Swift.UInt16>)))
+CharacterView(_core: Swift._StringCore(_baseAddress: Optional(0x000061800007da20), _countAndFlags: 18, _owner: Optional(Swift._HeapBufferStorage<Swift._StringBufferIVars, Swift.UInt16>)))
+CharacterView(_core: Swift._StringCore(_baseAddress: Optional(0x000061800007da20), _countAndFlags: 17, _owner: Optional(Swift._HeapBufferStorage<Swift._StringBufferIVars, Swift.UInt16>)))
+Optional(Swift._HeapBufferStorage<Swift._StringBufferIVars, Swift.UInt16>)
+CharacterView(_core: Swift._StringCore(_baseAddress: Optional(0x000060800007bda0), _countAndFlags: 21, _owner: Optional(Swift._HeapBufferStorage<Swift._StringBufferIVars, Swift.UInt16>)))
+CharacterView(_core: Swift._StringCore(_baseAddress: Optional(0x0000600000260ba0), _countAndFlags: 21, _owner: Optional(Swift._HeapBufferStorage<Swift._StringBufferIVars, Swift.UInt16>)))
+CharacterView(_core: Swift._StringCore(_baseAddress: Optional(0x00006000002608a0), _countAndFlags: 21, _owner: Optional(Swift._HeapBufferStorage<Swift._StringBufferIVars, Swift.UInt16>)))
 
 
 
@@ -32,7 +40,7 @@ str.append("!")
 //CharacterView(_core: Swift._StringCore(_baseAddress: Optional(0x00000001144388d0), _countAndFlags: 17, _owner: nil))
 
 func printStr(_ strInFunction:String) {
-    print (strInFunction.characters)
+    //print (strInFunction.characters)
     //CharacterView(_core: Swift._StringCore(_baseAddress: Optional(0x000000010d7d48d0), _countAndFlags: 17, _owner: nil))
 
 }
