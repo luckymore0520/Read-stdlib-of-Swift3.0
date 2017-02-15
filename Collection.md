@@ -1,4 +1,28 @@
+
+在日常的编程中，关于集合类型的特性大部分情况下用 `Swift` 标准库提供的 `Set`、`Dictionary`以及 `Array` 完全足够了， 当然，必要时也可以自己定制自己的集合，这就意味着需要了解与之相关的协议，而理解这些协议也对于我们更好地使用已有的集合类型有莫大帮助。 而集合相关的协议无非就是 `Sequence` 与 `Collection`。
+
+
 关于 `Swift` 的 `Sequence` 和 `Collection` 实际上包含了一系列的协议（当然，这两个本身就是协议），为了理解其工作原理并且正确使用，需要理清这些协议之间的关系以及各自的用途。
+
+
+从用途上来说， 一个 `Collection` 必然是一个 `Sequence` ，简而言之，`Collection` 包含了 `Sequence` 所有的特性，同时又具备更加丰富的功能。
+
+`Sequence` 的核心是 `迭代`，它可以生成一个迭代器，完成遍历，即为其核心也是唯一的功能，在`遍历`的基础上，`Swift` 为 `Sequence` 实现了诸多诸如 `map`、`filter` 这些大家用的比较多的方法的默认实现。
+
+`Collection` 相比于 `Sequence`， 最大的特点在于`下标`，即不需要遍历也可以取到任意位置的元素（元素的位置是固定的），这就意味着 `Collection` 在可遍历的基础上增加了诸多下标相关的功能。
+
+具体的差别将在下文通过源码来具体分析。
+
+
+
+从实际的代码关系上来说，用一张图即可说明：
+
+![](https://github.com/luckymore0520/Read-stdlib-of-Swift3.0/raw/master/SequenceAndCollection.png)
+ 
+两者同作为协议， `Collection` 继承与 `Sequence`， 同时又继承了 `Indexable` 这个关于 `下标索引` 的协议，  `Sequence` 依赖于 `IteratalProtocol` 这个用于实现迭代的协议。 `Collection` 本身具有针对迭代的默认实现，依赖于 `IndexingIterator`。
+
+具体的实现，同样会在下文配合源码进行分析。
+
 
 ##Sequence
 
@@ -28,7 +52,7 @@ while let animal = animalIterator.next() {
 通过 `makeIterator` 创建一个迭代器，调用迭代器的 `next()` 方法获取下一个元素，直至返回 `nil`
 
 
-###Demo
+###使用Demo
 
 ```swift
 struct CountDownIterator: IteratorProtocol {
@@ -56,9 +80,6 @@ struct Countdown: Sequence {
     }
 }
 
-
-
-
 let threeTwoOne = Countdown(start: 3)
 for count in threeTwoOne {
     print("\(count)")
@@ -84,9 +105,8 @@ public protocol IteratorProtocol {
 
 `associatedtype` 关联类型， Swift 中使用这个关键字来代表泛型，这里的 `Element` 的类型是自定义的。
 
-源代码参见 `SequenceAndCollection.Playground`
 
-
+Demo源代码参见 [SequenceAndCollection.Playground](https://github.com/luckymore0520/Read-stdlib-of-Swift3.0/tree/master/SequenceAndCollection.playground)
 
 
 ###Sequence 
@@ -168,6 +188,7 @@ public func map<T>(
 
 
 ##Collection
+
 ###什么是 Collection ？
 首先一个 `Collection` 必定是一个 `Sequence`（ `Collection` 协议本身继承 `Sequence`)，`Collection` 的特点在于：
 
@@ -175,7 +196,7 @@ public func map<T>(
 - 非破坏性
 - 可使用索引下标访问元素 
 
-这些特定决定了 Swift 标准库中的 `array` 和 `dictionary` 实质上都是 `Collection`。
+这些特定决定了 Swift 标准库中的 `Array` 和 `Dictionary` 实质上都是 `Collection`。
 
 要实现一个自定义的 `Collection` 需要实现`startIndex` 和 `endIndex` 属性以及 `index(after:)` 和 `subscript(position: Index) -> _Element { get }` 下标方法。
 
@@ -242,7 +263,7 @@ print(collection[0])
 
 首先 `Collection` 
 
-具体可以见 `SequenceAndCollection.Playground` 中的 Demo
+具体可以见 [SequenceAndCollection.Playground](https://github.com/luckymore0520/Read-stdlib-of-Swift3.0/tree/master/SequenceAndCollection.playground) 中的 Demo
 
 
 我们先看看 `Collection` 协议的定义：
@@ -334,6 +355,6 @@ protocol instead, because it has a more complete interface.
 
 
 
-总的来说， `Collection` 相比于 `Sequence` 引入了下标的概念，需要使用者提供下标的开始位置和结束位置，并且提供获取下一个下标的方法，有了这三个要素，`Collection`相比于`Sequence`就可以实现更多的功能，并且更加高效。
+总的来说， `Collection` 相比于 `Sequence` 引入了下标的概念，需要使用者提供下标的开始位置和结束位置，并且提供获取下一个下标的方法，有了这三个要素，`Collection`相比于`Sequence`就可以实现更多的功能。
 
 
